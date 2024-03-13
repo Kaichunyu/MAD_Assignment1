@@ -8,22 +8,16 @@ export default function App() {
     <View style={styles.container}>
       <View style={[styles.title, {flex: 1}]}>
         <Text style={styles.title}>My Todo List</Text>
-        <Text style={{fontSize: 15, fontWeight: 'bold'}}>
-          _______________________________________________
-        </Text>
       </View>
 
-      <View style={{flex: 7, gap: 10, padding: 10}}>
+      <View style={{flex: 14, gap: 10, padding: 10}}>
         <View style={styles.list}><Text style={styles.items}>Buy milk</Text></View>
         <View style={styles.list}><Text style={styles.items}>Buy eggs</Text></View>
         <View style={styles.list}><Text style={styles.items}>Buy veges</Text></View>
         <View style={styles.list}><Text style={styles.items}>Buy mango</Text></View>
       </View>
 
-      <View style={[styles.addbutton, {flex: 1}]}>
-        <Text style={{fontSize: 15}}>
-          __________________________________________________
-        </Text>
+      <View style={[styles.button, {flex: 1, borderTopWidth: 1}]}>
         <Pressable
           style={getButStyle}
           onPress={() => {
@@ -46,7 +40,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     flexDirection: 'column',
     marginTop: 50,
-    marginBottom: 30,
+    marginBottom: 50,
     marginHorizontal: 10,
   },
 
@@ -55,6 +49,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignItems: 'center',
     justifyContent: 'center',
+    borderBottomWidth: 2,
 
   },
 
@@ -72,7 +67,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 20,
-    padding: 10,
     fontWeight: '400',
     color: '#2196F3',
 
