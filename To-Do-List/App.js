@@ -1,35 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Pressable} from 'react-native';
+import ToDoList from './src/components/ToDoList';
+import AddNewButton from './src/components/AddNewButton';
 
 export default function App() {
-  const getButStyle = ({ pressed }) =>
-    pressed ? [styles.pressed, styles.button] : [styles.button];
+  
   return (
     <View style={styles.container}>
-      <View style={styles.topboard}>
+      <View style={styles.top}>
         <Text style={styles.title}>My Todo List</Text>
       </View>
 
-
-
-      <View style={styles.middleboard}>
-        <View style={styles.list}><Text style={styles.item}>Buy milk</Text></View>
-        <View style={styles.list}><Text style={styles.item}>Buy eggs</Text></View>
-        <View style={styles.list}><Text style={styles.item}>Buy veges</Text></View>
-        <View style={styles.list}><Text style={styles.item}>Buy mango</Text></View>
+      <View style={styles.middle}>
+        <ToDoList/>
       </View>
 
-
-
-      <View style={styles.bottomboard}>
-        <Pressable
-          style={getButStyle}
-          onPress={() => {
-            console.log('pressed')
-          }}
-        >
-          <Text style={styles.button}>Add New Todo</Text>
-        </Pressable>
+      <View style={styles.bottom}>
+        <AddNewButton/>
       </View>
     </View>
   );
@@ -45,21 +32,20 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
 
-  topboard: {
+  top: {
     flex: 1,
     borderBottomWidth: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
-  middleboard: {
+  middle: {
     flex: 14, 
-    gap: 10, 
     padding: 10,
 
   },
 
-  bottomboard: {
+  bottom: {
     flex: 1,
     borderTopWidth: 1,
     alignItems: 'center',
@@ -71,24 +57,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  list: {
-    backgroundColor: 'lightgreen',
-    borderRadius: 10,
-    padding: 10,
-  },
-
-  item: {
-    fontSize: 15,
-  },
-
-  button: {
-    fontSize: 20,
-    fontWeight: '400',
-    color: '#2196F3',
-
-  },
-
-  pressed: {
-    opacity: 0.5,
-  }
 });
