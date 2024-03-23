@@ -8,7 +8,7 @@ export const Home = () => {
     const navigation = useNavigation();
 
     const gotoAddNewToDoHandler = () => {
-        navigation.navigate("AddNewTodo")
+        navigation.navigate("Add New Todo")
     }
   
     return (
@@ -22,7 +22,7 @@ export const Home = () => {
             </View>
 
             <View style={styles.bottom}>
-                <TButton name="Add New ToDo" action={ gotoAddNewToDoHandler} />
+                <TButton iconname="add-circle-sharp" buttonname="Add New ToDo" action={gotoAddNewToDoHandler} />
             </View> 
         </View>
   );
