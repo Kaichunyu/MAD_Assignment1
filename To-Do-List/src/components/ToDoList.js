@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Pressable} from 'react-native';
-export default ToDoList = () => {
+export const ToDoList = () => {
 
     return (
-        <View style={{gap: 10}}>
+        <View style={{flexWrap: 'wrap', alignContent: "center"}}>
             <View style={styles.list}><Text style={styles.item}>Buy milk</Text></View>
             <View style={styles.list}><Text style={styles.item}>Buy eggs</Text></View>
             <View style={styles.list}><Text style={styles.item}>Buy veges</Text></View>
@@ -17,12 +17,16 @@ const styles = StyleSheet.create({
 list: {
     backgroundColor: 'lightgreen',
     borderRadius: 10,
-    padding: 10,
-    bordergap: 10,
+    width: 380,
+    height: 40,
+    margin: 5,
+    justifyContent: 'center',
+
   },
 
   item: {
     fontSize: 15,
+    padding: 10,
   },
 
 });
