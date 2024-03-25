@@ -7,7 +7,7 @@ export const ImageButton = ({ buttonname, iconname, action }) => {
 			style={styles.icon}
 			name={iconname}
 			onPress={action}
-			color={"black"}
+			color={"brown"}
 			size={20}
 		>
 			<Text style={styles.text}>{buttonname}</Text>
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 	},
 
 	icon: {
-		backgroundColor: "lightgreen",
+		backgroundColor: "lightblue",
 		padding: 10,
 	},
 });

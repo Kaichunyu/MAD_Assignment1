@@ -34,11 +34,7 @@ export const AddNewTodo = () => {
 					buttonname="Cancel"
 					action={gobackHomeHandler}
 				/>
-				<ImageButton
-					iconname="save"
-					buttonname="Save"
-					action={saveHandler}
-				/>
+				<ImageButton iconname="save" buttonname="Save" action={saveHandler} />
 			</View>
 		</View>
 	);

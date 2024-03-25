@@ -5,13 +5,13 @@ import { AddNewTodo } from "./src/screens/AddNewTodo";
 
 const Stack = createStackNavigator();
 
-export default function App() { 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Add New Todo" component={AddNewTodo} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
+export default function App() {
+	return (
+		<NavigationContainer>
+			<Stack.Navigator>
+				<Stack.Screen name="Home" component={Home} />
+				<Stack.Screen name="Add New Todo" component={AddNewTodo} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }
