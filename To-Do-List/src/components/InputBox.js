@@ -1,9 +1,14 @@
 import { StyleSheet, View, Text, TextInput } from "react-native";
 
-export const InputBox = ({ multipleline }) => {
+export const InputBox = ({ multipleline, value, onchangetext }) => {
 	return (
 		<View style={{ padding: 5 }}>
-			<TextInput style={styles.box} multiline={multipleline} />
+			<TextInput
+				style={styles.box}
+				multiline={multipleline}
+				value={value}
+				onChangeText={onchangetext}
+			/>
 		</View>
 	);
 };

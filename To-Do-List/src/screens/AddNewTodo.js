@@ -1,5 +1,6 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 import { Title } from "../components/Title";
 import { SubTitle } from "../components/SubTitle";
 import { ImageButton } from "../components/ImageButton";
@@ -12,9 +13,26 @@ export const AddNewTodo = () => {
 		navigation.navigate("Home");
 	};
 
+	const [text, setText] = useState("");
+	const [text1, setText1] = useState("");
+	const [todos, setTodos] = useState([]);
+					
 	const saveHandler = () => {
-		console.log("Saved");
-	};
+		if (text !== "" & text1 !== "") {
+			const title = text;
+			const description = text1;
+			const maxid = todos.reduce((a, todo) => Math.max(a, todo.id), 0);
+			const newTodo = { id: maxid + 1, title, description, finished: false };
+			setTodos((cur) => [...cur, newTodo]);
+			setText(null)
+			setText1(null)
+
+			Alert.alert("Todo Added Successfully")
+		} else {
+			Alert.alert("Title and Description must not be empty.")
+		}
+	}
+		
 	return (
 		<View style={styles.container}>
 			<View style={styles.top}>
@@ -23,9 +41,9 @@ export const AddNewTodo = () => {
 
 			<View style={styles.middle}>
 				<SubTitle name="Title" />
-				<InputBox multipleline={false} />
+				<InputBox multipleline={false} value={text} onchangetext={setText}/>
 				<SubTitle name="Description" />
-				<InputBox multipleline={true} />
+				<InputBox multipleline={true} value={text1} onchangetext={setText1}/>
 			</View>
 
 			<View style={styles.bottom}>
