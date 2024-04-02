@@ -1,8 +1,14 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Title } from "../components/Title";
 import { ImageButton } from "../components/ImageButton";
 import { ToDoList } from "../components/ToDoList";
+import { loadData, saveData } from "../models/data";
+import { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
+// await AsyncStorage.getItem('to-do-list');
 
 export const Home = () => {
 	const navigation = useNavigation();
@@ -11,12 +17,34 @@ export const Home = () => {
 		navigation.navigate("Add New Todo");
 	};
 
-	const todolist = [
-		{ id: 1, title: "Buy Mango", description: "2 pieces", finished: false },
-		{ id: 2, title: "Buy Milk", description: "200ml", finished: false },
-		{ id: 3, title: "Buy Veges", description: "Bok Choy", finished: false },
-		{ id: 4, title: "Buy Coke", description: "200ml", finished: false },
-	];
+	const [tasks, setTasks] = useState([]);
+	useEffect(() => {
+		const firstLoad = async () => {
+			const data = await loadData()
+			setTasks(data.tasks)
+		}
+		firstLoad()
+	}, [])
+	useEffect(() => {
+		saveData({tasks})
+	}, [tasks])
+
+
+	const deleteTask = (id) => {
+		setTasks(ts => ts.filter(t => t.id!=id))
+	}
+
+	const completeTask = (id) => {
+		setTasks(ts => {
+			const nts = ts.map(t => {
+				const nt = { ...t }
+				if (t.id === id)
+					nt.finished = true
+				return nt
+			})
+			return nts
+		})
+	}
 
 	return (
 		<View style={styles.container}>
@@ -25,7 +53,12 @@ export const Home = () => {
 			</View>
 
 			<View style={styles.middle}>
-				<ToDoList data={todolist} />
+				<ToDoList
+					data={tasks}
+					deleteTask={deleteTask}
+					completeTask={completeTask}
+				/>
+				<Text>{console.log(tasks)}</Text>
 			</View>
 
 			<View style={styles.bottom}>

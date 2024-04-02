@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, FlatList, Pressable } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export const ToDoList = ({ data }) => {
+export const ToDoList = ({ data, deleteTask, completeTask }) => {
 	return (
 		<View style={{ alignContent: "center" }}>
 			<FlatList
@@ -27,18 +27,18 @@ export const ToDoList = ({ data }) => {
 						<View
 							style={{ flexDirection: "row", justifyContent: "space-around" }}
 						>
-							<Pressable
+							{item.finished == false && <Pressable
 								style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }]}
-								onPress={() => {}}
+								onPress={() => { completeTask(item.id) }}
 							>
 								<Ionicons
 									name="cloud-done"
 									style={{ padding: 10, fontSize: 30, color: "green" }}
 								></Ionicons>
-							</Pressable>
+							</Pressable>}
 							<Pressable
 								style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }]}
-								onPress={() => {}}
+								onPress={() => {deleteTask(item.id)}}
 							>
 								<Ionicons
 									name="trash"

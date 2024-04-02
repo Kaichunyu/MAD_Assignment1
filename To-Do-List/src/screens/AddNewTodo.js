@@ -1,10 +1,12 @@
 import { StyleSheet, View, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Title } from "../components/Title";
 import { SubTitle } from "../components/SubTitle";
 import { ImageButton } from "../components/ImageButton";
 import { InputBox } from "../components/InputBox";
+import { loadData, saveData } from "../models/data";
+import { ToDoList } from "../components/ToDoList";
 
 export const AddNewTodo = () => {
 	const navigation = useNavigation();
@@ -15,15 +17,25 @@ export const AddNewTodo = () => {
 
 	const [text, setText] = useState("");
 	const [text1, setText1] = useState("");
-	const [todos, setTodos] = useState([]);
+	const [tasks, setTasks] = useState([]);
+	useEffect(() => {
+		const firstLoad = async () => {
+			const data = await loadData()
+			setTasks(data.tasks)
+		}
+		firstLoad()
+	}, [])
+	useEffect(() => {
+		saveData({tasks})
+	}, [tasks])
 					
 	const saveHandler = () => {
 		if (text !== "" & text1 !== "") {
 			const title = text;
 			const description = text1;
-			const maxid = todos.reduce((a, todo) => Math.max(a, todo.id), 0);
-			const newTodo = { id: maxid + 1, title, description, finished: false };
-			setTodos((cur) => [...cur, newTodo]);
+			const maxid = tasks.reduce((a, t) => a < t.id ? t.id : a, 0);
+			console.log("maxid: ", maxid)
+			setTasks(task => [...tasks, {id: maxid + 1, title: title, description: description, finished: false }])
 			setText(null)
 			setText1(null)
 
@@ -41,9 +53,10 @@ export const AddNewTodo = () => {
 
 			<View style={styles.middle}>
 				<SubTitle name="Title" />
-				<InputBox multipleline={false} value={text} onchangetext={setText}/>
+				<InputBox multipleline={false} value={text} onchangetext={setText} />
 				<SubTitle name="Description" />
-				<InputBox multipleline={true} value={text1} onchangetext={setText1}/>
+				<InputBox multipleline={true} value={text1} onchangetext={setText1} />
+				{/* <ToDoList data={tasks} /> */}
 			</View>
 
 			<View style={styles.bottom}>
