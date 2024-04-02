@@ -1,10 +1,4 @@
-import {
-	StyleSheet,
-	Text,
-	View,
-	FlatList,
-	Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, FlatList, Pressable } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export const ToDoList = ({ data }) => {
@@ -15,12 +9,43 @@ export const ToDoList = ({ data }) => {
 				renderItem={({ item }) => (
 					<View style={styles.list}>
 						<Pressable
-							style={ ({pressed}) => [{opacity: pressed? 0.5:1.0, flexDirection: "row", justifyContent: "space-between"}]}
-							onPress={() => { console.log("Clicked") }}
+							style={({ pressed }) => [
+								{
+									opacity: pressed ? 0.5 : 1.0,
+									flexDirection: "row",
+									justifyContent: "space-between",
+								},
+							]}
+							onPress={() => {
+								console.log("Clicked");
+							}}
 						>
 							<Text style={styles.item}>{item.title}</Text>
 							<Ionicons style={styles.arrowicon} name="caret-down" />
 						</Pressable>
+						<Text>{item.description}</Text>
+						<View
+							style={{ flexDirection: "row", justifyContent: "space-around" }}
+						>
+							<Pressable
+								style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }]}
+								onPress={() => {}}
+							>
+								<Ionicons
+									name="cloud-done"
+									style={{ padding: 10, fontSize: 30, color: "green" }}
+								></Ionicons>
+							</Pressable>
+							<Pressable
+								style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1.0 }]}
+								onPress={() => {}}
+							>
+								<Ionicons
+									name="trash"
+									style={{ padding: 10, fontSize: 30, color: "red" }}
+								></Ionicons>
+							</Pressable>
+						</View>
 					</View>
 				)}
 				keyExtractor={(item) => item.id}
@@ -33,7 +58,7 @@ const styles = StyleSheet.create({
 	list: {
 		backgroundColor: "lightblue",
 		borderRadius: 10,
-		margin: 5
+		margin: 5,
 	},
 
 	item: {
@@ -46,5 +71,4 @@ const styles = StyleSheet.create({
 		padding: 10,
 		color: "brown",
 	},
-
 });
