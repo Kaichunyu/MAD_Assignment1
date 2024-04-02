@@ -11,6 +11,13 @@ export const Home = () => {
 		navigation.navigate("Add New Todo");
 	};
 
+	const todolist = [
+		{ id: 1, title: "Buy Mango", description: "2 pieces", finished: false },
+		{ id: 2, title: "Buy Milk", description: "200ml", finished: false },
+		{ id: 3, title: "Buy Veges", description: "Bok Choy", finished: false },
+		{ id: 4, title: "Buy Coke", description: "200ml", finished: false },
+	];
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.top}>
@@ -18,7 +25,7 @@ export const Home = () => {
 			</View>
 
 			<View style={styles.middle}>
-				<ToDoList />
+				<ToDoList data={todolist} />
 			</View>
 
 			<View style={styles.bottom}>

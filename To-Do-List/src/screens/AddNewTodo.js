@@ -27,7 +27,7 @@ export const AddNewTodo = () => {
 			setText(null)
 			setText1(null)
 
-			Alert.alert("Todo Added Successfully")
+			Alert.alert("Todo Added Successfully.")
 		} else {
 			Alert.alert("Title and Description must not be empty.")
 		}
@@ -49,7 +49,7 @@ export const AddNewTodo = () => {
 			<View style={styles.bottom}>
 				<ImageButton
 					iconname="backspace"
-					buttonname="Cancel"
+					buttonname="Back"
 					action={gobackHomeHandler}
 				/>
 				<ImageButton iconname="save" buttonname="Save" action={saveHandler} />
