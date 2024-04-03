@@ -18,7 +18,13 @@ export const ToDoList = ({ data, deleteTask, completeTask, expandTask }) => {
 							expandTask(item.id);
 						}}
 					>
-						<Text style={styles.titleText}>{item.title}</Text>
+						{item.finished == true ? (
+							<Text style={[styles.titleText, styles.done]}>
+								{item.title} (done)
+							</Text>
+						) : (
+							<Text style={styles.titleText}>{item.title}</Text>
+						)}
 						<Ionicons
 							style={styles.arrowicon}
 							name={item.isExpanded == false ? "caret-down" : "caret-up"}
@@ -26,7 +32,13 @@ export const ToDoList = ({ data, deleteTask, completeTask, expandTask }) => {
 					</Pressable>
 					{item.isExpanded == true && (
 						<View>
-							<Text style={styles.description}>{item.description}</Text>
+							{item.finished == true ? (
+								<Text style={[styles.description, styles.done]}>
+									{item.description}
+								</Text>
+							) : (
+								<Text style={styles.description}>{item.description}</Text>
+							)}
 
 							<View style={styles.controlPanel}>
 								{item.finished == false && (
@@ -99,5 +111,8 @@ const styles = StyleSheet.create({
 		padding: 10,
 		fontSize: 30,
 		color: "red",
+	},
+	done: {
+		opacity: 0.3,
 	},
 });
