@@ -5,10 +5,6 @@ import { ImageButton } from "../components/ImageButton";
 import { ToDoList } from "../components/ToDoList";
 import { loadData, saveData } from "../models/data";
 import { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
-// await AsyncStorage.getItem('to-do-list');
 
 export const Home = () => {
 	const navigation = useNavigation();
@@ -20,31 +16,41 @@ export const Home = () => {
 	const [tasks, setTasks] = useState([]);
 	useEffect(() => {
 		const firstLoad = async () => {
-			const data = await loadData()
-			setTasks(data.tasks)
-		}
-		firstLoad()
-	}, [])
+			const data = await loadData();
+			setTasks(data.tasks);
+		};
+		firstLoad();
+	}, []);
 	useEffect(() => {
-		saveData({tasks})
-	}, [tasks])
-
+		saveData({ tasks });
+	}, [tasks]);
 
 	const deleteTask = (id) => {
-		setTasks(ts => ts.filter(t => t.id!=id))
-	}
+		setTasks((ts) => ts.filter((t) => t.id != id));
+	};
 
 	const completeTask = (id) => {
-		setTasks(ts => {
-			const nts = ts.map(t => {
-				const nt = { ...t }
-				if (t.id === id)
-					nt.finished = true
-				return nt
-			})
-			return nts
-		})
-	}
+		setTasks((ts) => {
+			const nts = ts.map((t) => {
+				const nt = { ...t };
+				if (t.id === id) nt.finished = true;
+				return nt;
+			});
+			return nts;
+		});
+	};
+	const expandTask = (id) => {
+		setTasks((ts) => {
+			const nts = ts.map((t) => {
+				const nt = { ...t };
+				if (t.id === id) {
+					nt.isExpanded = !nt.isExpanded;
+				}
+				return nt;
+			});
+			return nts;
+		});
+	};
 
 	return (
 		<View style={styles.container}>
@@ -57,6 +63,7 @@ export const Home = () => {
 					data={tasks}
 					deleteTask={deleteTask}
 					completeTask={completeTask}
+					expandTask={expandTask}
 				/>
 				<Text>{console.log(tasks)}</Text>
 			</View>

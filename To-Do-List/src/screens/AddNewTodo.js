@@ -6,7 +6,6 @@ import { SubTitle } from "../components/SubTitle";
 import { ImageButton } from "../components/ImageButton";
 import { InputBox } from "../components/InputBox";
 import { loadData, saveData } from "../models/data";
-import { ToDoList } from "../components/ToDoList";
 
 export const AddNewTodo = () => {
 	const navigation = useNavigation();
@@ -20,31 +19,40 @@ export const AddNewTodo = () => {
 	const [tasks, setTasks] = useState([]);
 	useEffect(() => {
 		const firstLoad = async () => {
-			const data = await loadData()
-			setTasks(data.tasks)
-		}
-		firstLoad()
-	}, [])
+			const data = await loadData();
+			setTasks(data.tasks);
+		};
+		firstLoad();
+	}, []);
 	useEffect(() => {
-		saveData({tasks})
-	}, [tasks])
-					
+		saveData({ tasks });
+	}, [tasks]);
+
 	const saveHandler = () => {
-		if (text !== "" & text1 !== "") {
+		if ((text !== "") & (text1 !== "")) {
 			const title = text;
 			const description = text1;
-			const maxid = tasks.reduce((a, t) => a < t.id ? t.id : a, 0);
-			console.log("maxid: ", maxid)
-			setTasks(task => [...tasks, {id: maxid + 1, title: title, description: description, finished: false }])
-			setText(null)
-			setText1(null)
+			const maxid = tasks.reduce((a, t) => (a < t.id ? t.id : a), 0);
+			console.log("maxid: ", maxid);
+			setTasks((task) => [
+				...tasks,
+				{
+					id: maxid + 1,
+					title: title,
+					description: description,
+					finished: false,
+					isExpanded: false,
+				},
+			]);
+			setText(null);
+			setText1(null);
 
-			Alert.alert("Todo Added Successfully.")
+			Alert.alert("Todo Added Successfully.");
 		} else {
-			Alert.alert("Title and Description must not be empty.")
+			Alert.alert("Title and Description must not be empty.");
 		}
-	}
-		
+	};
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.top}>
@@ -56,7 +64,6 @@ export const AddNewTodo = () => {
 				<InputBox multipleline={false} value={text} onchangetext={setText} />
 				<SubTitle name="Description" />
 				<InputBox multipleline={true} value={text1} onchangetext={setText1} />
-				{/* <ToDoList data={tasks} /> */}
 			</View>
 
 			<View style={styles.bottom}>

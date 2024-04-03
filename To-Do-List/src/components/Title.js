@@ -10,8 +10,6 @@ export const Title = ({ title }) => {
 
 const styles = StyleSheet.create({
 	title: {
-		// flex: 1,
-		// borderBottomWidth: 2,
 		alignItems: "center",
 		justifyContent: "center",
 	},
