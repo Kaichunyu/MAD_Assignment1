@@ -5,6 +5,7 @@ import { ImageButton } from "../components/ImageButton";
 import { ToDoList } from "../components/ToDoList";
 import { loadData, saveData } from "../models/data";
 import { useState, useEffect } from "react";
+import { useIsFocused } from '@react-navigation/native';
 
 export const Home = () => {
 	const navigation = useNavigation();
@@ -14,13 +15,18 @@ export const Home = () => {
 	};
 
 	const [tasks, setTasks] = useState([]);
+	const isFocused = useIsFocused();
+
 	useEffect(() => {
-		const firstLoad = async () => {
-			const data = await loadData();
-			setTasks(data.tasks);
-		};
-		firstLoad();
-	}, []);
+		if (isFocused) {
+				const firstLoad = async () => {
+					const data = await loadData();
+					setTasks(data.tasks);
+				};
+				firstLoad();
+		}
+	}, [isFocused]);
+
 	useEffect(() => {
 		saveData({ tasks });
 	}, [tasks]);
