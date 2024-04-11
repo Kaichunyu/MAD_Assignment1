@@ -71,7 +71,6 @@ export const Home = () => {
 					completeTask={completeTask}
 					expandTask={expandTask}
 				/>
-				<Text>{console.log(tasks)}</Text>
 			</View>
 
 			<View style={styles.bottom}>
